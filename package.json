@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "battleship",
   "version": "1.0.0",
-  "description": "A Node template repo with WebPack, ESLint, Prettier.",
+  "description": "Battleship Package",
   "main": "index.js",
   "scripts": {
     "test": "jest",
