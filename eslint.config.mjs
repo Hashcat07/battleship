@@ -21,8 +21,13 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: { globals:{ ...globals.jest}, rules: {
+    'no-unused-vars' : 'warn',
+    'no-undef': 'warn'
   },
+},
+  },
+  
   pluginReact.configs.flat.recommended,
   eslintConfigPrettier,
 ]);
