@@ -1,7 +1,6 @@
 export class Ship{
-    constructor(length,axis){
+    constructor(length){
         this.length=length
-        this.axis=axis
         this.damage=0
         this.sunk=false
     }
