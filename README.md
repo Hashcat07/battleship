@@ -1,10 +1,9 @@
-# Node Template
+# Battleship
 
-This is a **Node.js template repository** set up with **Webpack**, **Babel**, **Jest**, **ESLint**, and **Prettier** for rapid development. It provides a good starting point for setting up a modern JavaScript project with these tools.
+A browser-based Battleship game where players take turns attacking each other’s boards until all ships are sunk.
 
-## Features
-- **Webpack** for bundling and building assets.
-- **Babel** for JavaScript transpiling (supports ES6+).
-- **Jest** for unit testing.
-- **ESLint** for linting JavaScript code.
-- **Prettier** for automatic code formatting.
+**Tech Used**
+- JavaScript (ES Modules)
+- Jest (unit testing)
+- Babel (ESM support in tests)
+- HTML & CSS for the UI
