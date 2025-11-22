@@ -14,7 +14,7 @@ describe('ship test',()=>{
         ship.hit()
         ship.hit()
         ship.hit()
-        expect(ship.sunk).toBe(true)
+        expect(ship.isSunk()).toBe(true)
     })
 })
 
@@ -37,17 +37,31 @@ describe('Gameboad Recieve Hit test',()=>{
     })
      test('Attck ships',()=>{
         
-        expect(gameBoard.recieveAttack(2,0)).toBe('Hit')
+        expect(gameBoard.receiveAttack(2,0)).toBe('Hit')
     })
     test('Attack ships (false)',()=>{
-        expect(gameBoard.recieveAttack(3,0)).toBe('Miss')
+        expect(gameBoard.receiveAttack(3,0)).toBe('Miss')
     })
     test('Attack Ships (outOfBound)',()=>{
-        expect(gameBoard.recieveAttack(11,0)).toBe('Out of Board')
-        expect(gameBoard.recieveAttack(0,11)).toBe('Out of Board')
+        expect(gameBoard.receiveAttack(11,0)).toBe('Out of Board')
+        expect(gameBoard.receiveAttack(0,11)).toBe('Out of Board')
     })
     test('Attack already attacked target',()=>{
-        gameBoard.recieveAttack(2,0)
-        expect(gameBoard.recieveAttack(2,0)).toBe('already attacked')
+        gameBoard.receiveAttack(2,0)
+        expect(gameBoard.receiveAttack(2,0)).toBe('already attacked')
     })
+})
+
+describe('All ships sunk',()=>{
+    let gameBoard
+    beforeAll(()=>{
+        gameBoard=new GameBoard('test')
+        gameBoard.place('d','x',2,0)
+    })
+    test('Ships sunk test',()=>{
+        gameBoard.receiveAttack(2,0)
+        gameBoard.receiveAttack(2,1)
+        expect(gameBoard.allSunk()).toBe(true)
+    })
+
 })

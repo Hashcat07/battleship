@@ -12,5 +12,6 @@ export class Ship{
         if(this.damage>=this.length){
             this.sunk=true
         }
+        return this.sunk
     }
 }
