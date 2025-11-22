@@ -18,6 +18,8 @@ export class GameBoard{
         let shipLength=this.shipType(type);
         if(!this.shipUsed.includes(type))
     {
+        if (axis === 'x' && yAxis + shipLength > 10) return false;
+        if (axis === 'y' && xAxis + shipLength > 10) return false;
         const ship=new Ship(shipLength)
         this.shipUsed.push(type)
         this.ships.push(ship)
@@ -44,25 +46,19 @@ export class GameBoard{
 
     }
     receiveAttack(xAxis,yAxis){
-        
         if(xAxis>9||yAxis>9||xAxis<0||yAxis<0)
             return 'Out of Board'
-    
         let boardPosition=this.board[xAxis][yAxis]
         if(this.missedShots.some(([x,y])=>x==xAxis&&y==yAxis))
             return 'already attacked'
-        if(boardPosition instanceof Ship){
+        else if(boardPosition instanceof Ship){
             boardPosition.hit()
-            this.board[xAxis][yAxis]='hit'
             return 'Hit'
         }
         else{
-            boardPosition=1
             this.missedShots.push([xAxis,yAxis])
             return 'Miss'
         }
-        
-
     }
     allSunk(){
        return this.ships.every(ship=>
