@@ -1,5 +1,6 @@
 import { Ship } from "./ship";
 import { GameBoard } from "./gameBoard";
+import { Player } from "./player";
 
 describe('ship test',()=>{
     let ship
@@ -64,4 +65,21 @@ describe('All ships sunk',()=>{
         expect(gameBoard.allSunk()).toBe(true)
     })
 
+})
+
+describe('Player test',()=>{
+    let botPlayer;
+    let realPlayer;
+    beforeAll(()=>{
+    botPlayer=new Player(true);
+    realPlayer = new Player(false);
+    })
+    test('Calls gameBoard botPlayer',()=>{
+        expect(botPlayer.gameBoard).toBeDefined()
+        expect(botPlayer.gameBoard).toBeInstanceOf(GameBoard)
+    })
+    test('calls gameBoard realPlayer',()=>{
+        expect(realPlayer.gameBoard).toBeDefined()
+        expect(realPlayer.gameBoard).toBeInstanceOf(GameBoard)
+    })
 })
