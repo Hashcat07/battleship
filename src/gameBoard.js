@@ -43,7 +43,7 @@ export class GameBoard{
     return false
 
     }
-    recieveAttack(xAxis,yAxis){
+    receiveAttack(xAxis,yAxis){
         
         if(xAxis>9||yAxis>9||xAxis<0||yAxis<0)
             return 'Out of Board'
@@ -63,5 +63,9 @@ export class GameBoard{
         }
         
 
+    }
+    allSunk(){
+       return this.ships.every(ship=>
+            ship.isSunk())
     }
 }
