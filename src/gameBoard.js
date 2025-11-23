@@ -21,10 +21,16 @@ export class GameBoard{
     {
         if (axis === 'x' && yAxis + shipLength > 10) return false;
         if (axis === 'y' && xAxis + shipLength > 10) return false;
+            for (let i = 0; i < shipLength; i++) {
+        let checkX = axis === 'x' ? xAxis : xAxis + i;
+        let checkY = axis === 'x' ? yAxis + i : yAxis;
+        if (this.board[checkX][checkY] instanceof Ship) {
+            console.log(`Overlap detected at [${checkX},${checkY}] for ${type}`);
+            return false;
+        }
+    }
         const ship=new Ship(shipLength)
-        this.shipUsed.push(type)
-        this.ships.push(ship)
-        
+          
        if (axis==='x') { 
        
         for(let i=0;i<shipLength;i++)
@@ -40,6 +46,8 @@ export class GameBoard{
             
             this.board[xAxis+i][yAxis]=ship
          }}
+        this.shipUsed.push(type)
+        this.ships.push(ship)
          return true
     }
     else
@@ -63,6 +71,9 @@ export class GameBoard{
         }
     }
     allSunk(){
+        console.log(this.ships)
+        console.log(this.ships.every(ship=>
+            ship.isSunk()))
        return this.ships.every(ship=>
             ship.isSunk())
     }
