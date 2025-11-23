@@ -5,7 +5,7 @@ export class Ship{
         this.sunk=false
     }
     hit(){
-        this.damage++
+        this.damage+=1
         this.isSunk()
     }
     isSunk(){
