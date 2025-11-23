@@ -6,6 +6,7 @@ export class GameBoard{
         this.shipUsed=[]
         this.ships=[]
         this.missedShots=[]
+        this.hitShots=[]
     }
     shipType(type){
         if(type==='d')return 2
@@ -52,6 +53,7 @@ export class GameBoard{
         if(this.missedShots.some(([x,y])=>x==xAxis&&y==yAxis))
             return 'already attacked'
         else if(boardPosition instanceof Ship){
+            this.hitShots.push([xAxis,yAxis])
             boardPosition.hit()
             return 'Hit'
         }
