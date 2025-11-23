@@ -13,14 +13,14 @@ export class GameController{
     placeShips(){        
         this.botPlayer.gameBoard.place('ca', 'x', 0, 0); // Carrier length 5   
         this.botPlayer.gameBoard.place('b',  'y', 2, 4); // Battleship length 4
-        this.botPlayer.gameBoard.place('cr', 'x', 5, 2); // Cruiser length 3
+        this.botPlayer.gameBoard.place('cr', 'x', 4, 1); // Cruiser length 3
         this.botPlayer.gameBoard.place('s',  'y', 7, 7); // Submarine length 3
         this.botPlayer.gameBoard.place('d',  'x', 9, 5); // Destroyer length 2
     
         // Bot Player ship placement
         this.realPlayer.gameBoard.place('ca', 'y', 0, 9); // Carrier
         this.realPlayer.gameBoard.place('b',  'x', 3, 1); // Battleship
-        this.realPlayer.gameBoard.place('cr', 'y', 6, 4); // Cruiser
+        this.realPlayer.gameBoard.place('cr', 'y', 5, 4); // Cruiser
         this.realPlayer.gameBoard.place('s',  'x', 8, 0); // Submarine
         this.realPlayer.gameBoard.place('d',  'y', 1, 7); // Destroyer
 
