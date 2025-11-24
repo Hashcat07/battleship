@@ -14,10 +14,12 @@ export class GameBoard{
         if(type==='cr')return 3
         if(type==='b')return 4
         if(type==='ca')return 5
+        else
+            return null
     }
     place(type,axis,xAxis,yAxis){
         let shipLength=this.shipType(type);
-        if(!this.shipUsed.includes(type))
+        if(!this.shipUsed.includes(type)&& shipLength!==null)
     {
         if (axis === 'x' && yAxis + shipLength > 10) return false;
         if (axis === 'y' && xAxis + shipLength > 10) return false;
@@ -52,7 +54,6 @@ export class GameBoard{
     }
     else
     return false
-
     }
     receiveAttack(xAxis,yAxis){
         if(xAxis>9||yAxis>9||xAxis<0||yAxis<0)
@@ -63,12 +64,13 @@ export class GameBoard{
         else if(boardPosition instanceof Ship){
             this.hitShots.push([xAxis,yAxis])
             boardPosition.hit()
+            this.allSunk()
             return 'Hit'
         }
         else{
             this.missedShots.push([xAxis,yAxis])
             return 'Miss'
-        }
+        }   
     }
     allSunk(){
         console.log(this.ships)
