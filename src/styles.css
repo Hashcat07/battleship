@@ -1,7 +1,7 @@
 body {
   background-color: #000000;
   color: #ffffff;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   margin: 0;
   padding: 0;
   display: flex;
@@ -74,7 +74,8 @@ body {
   flex-wrap: wrap;
 }
 
-.gameBoard, .gameboard {
+.gameBoard,
+.gameboard {
   background-color: #1a1a1a;
   border-radius: 10px;
   padding: 20px;
@@ -90,7 +91,8 @@ body {
   text-shadow: 0 0 8px #ffaa00;
 }
 
-.playerBoard, .botBoard {
+.playerBoard,
+.botBoard {
   display: grid;
   grid-template-columns: 20px repeat(10, 38px);
   grid-template-rows: 20px repeat(10, 38px);
@@ -167,7 +169,8 @@ dialog label {
   color: #ffffff;
 }
 
-dialog select, dialog input {
+dialog select,
+dialog input {
   background-color: #333333;
   color: #ffffff;
   border: 1px solid #00ffff;
@@ -214,13 +217,13 @@ fieldset label {
   margin: 0;
   width: 1rem;
 }
-.legend{
+.legend {
   font-size: smaller;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.keyLegend{
+.keyLegend {
   border: 2px solid white;
   border-top: none;
   border-left: none;

@@ -1,6 +1,5 @@
-import "./styles.css"
-import { Ui } from "./ui"
-import { GameController } from "./gameController"
+import "./styles.css";
+import { Ui } from "./ui";
 
-const ui = new Ui()
+const ui = new Ui();
 ui.renderBoard()

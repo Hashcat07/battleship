@@ -1,8 +1,8 @@
 import js from "@eslint/js";
 import globals from "globals";
 import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import { defineConfig } from "eslint/config";
 
 export default defineConfig([
   {
@@ -16,18 +16,24 @@ export default defineConfig([
   },
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+      },
+    },
+    plugins: {
+      react: pluginReact,
+    },
+    rules: {
+      "no-unused-vars": "warn",
+      "no-undef": "warn",
+      "react/react-in-jsx-scope": "off",
+    },
+    extends: [
+      js.configs.recommended,
+      pluginReact.configs.flat.recommended,
+      eslintConfigPrettier,
+    ],
   },
-  {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
-    languageOptions: { globals:{ ...globals.jest}, rules: {
-    'no-unused-vars' : 'warn',
-    'no-undef': 'warn'
-  },
-},
-  },
-  
-  pluginReact.configs.flat.recommended,
-  eslintConfigPrettier,
 ]);
