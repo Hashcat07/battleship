@@ -6,7 +6,32 @@
     <title>Battleship</title>
   </head>
   <body>
+    <dialog id="userFormDialog">
+    <form method="dialog" id="userForm">
+      <label for="type">Ship Type: <select name="type" id="typeSelect" required>
+      <option value="" disabled selected hidden>Select Ship Type</option>
+      <option value="ca">Carrier (5)</option>
+      <option value="b">Battleship (4)</option>
+      <option value="cr">Cruiser (3)</option>
+      <option value="s">Submarine (3)</option>
+      <option value="d">Destroyer (2)</option>
+      </select></label><br>
+      <label for="axis">Axis: <fieldset><input type="radio" name="axis" id="xAxis" value="x" checked>X <input type="radio" name="axis" id="yAxis" value="y">Y</fieldset></label>
+      <label for="xcoords">X-Coordinates <input type="number" name="xcoords" id="xcoords" min="0" max="9" required></label><br>
+      <label for="ycoords">Y-Coordinates <input type="number" name="ycoords" id="ycoords" min="0" max="9" required></label>
+      <button type="submit" class="submit">Submit</button>
+    </form>
+    <button class="closeDialog">X</button>
+  </dialog>
     <div class="container">
+      <div class="header">
+        <div class="title"><h1>Battleship</h1></div>
+        <div class="buttons">
+        <button class="action placeShip">Place Ships</button>
+        <button class="action play">Play</button>
+      </div>
+      </div>
+      <div class="gameDiv">
       <div class="gameBoard" id="player">
         <div class="name"><p><h1>Player Board</h1></p></div>
         <div class="playerBoard">
@@ -16,8 +41,8 @@
       <div class="gameboard" id="bot">
         <div class="name"><p><h1>Bot Board</h1></p></div>
         <div class="botBoard">
-
         </div>
+      </div>
       </div>
     </div>
   </body>

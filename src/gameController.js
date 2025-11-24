@@ -6,25 +6,15 @@ export class GameController{
         this.realPlayer=new Player()
         this.currentPlayer=this.realPlayer
         this.placeShips()
+        this.botPlace()
     }
      createPlayer(isBot=false){
         return new Player(isBot)
     }
-    placeShips(){        
-        this.botPlayer.gameBoard.place('ca', 'x', 0, 0); // Carrier length 5   
-        this.botPlayer.gameBoard.place('b',  'y', 2, 4); // Battleship length 4
-        this.botPlayer.gameBoard.place('cr', 'x', 4, 1); // Cruiser length 3
-        this.botPlayer.gameBoard.place('s',  'y', 7, 7); // Submarine length 3
-        this.botPlayer.gameBoard.place('d',  'x', 9, 5); // Destroyer length 2
-    
-        // Bot Player ship placement
-        this.realPlayer.gameBoard.place('ca', 'y', 0, 9); // Carrier
-        this.realPlayer.gameBoard.place('b',  'x', 3, 1); // Battleship
-        this.realPlayer.gameBoard.place('cr', 'y', 5, 4); // Cruiser
-        this.realPlayer.gameBoard.place('s',  'x', 8, 0); // Submarine
-        this.realPlayer.gameBoard.place('d',  'y', 1, 7); // Destroyer
-
-    
+    placeShips(type,axis,xcoords,ycoords){  
+        if(this.realPlayer.gameBoard.place(type,axis,xcoords,ycoords))
+            return true
+        return false
     }
     attachEventListener(){
         const cells=Array.from(document.querySelectorAll('.cell'))
@@ -39,6 +29,7 @@ export class GameController{
                 
             })
         })
+
     }
     sendAttack(player,xCoords,yCoords){
         let result=player.gameBoard.receiveAttack(xCoords,yCoords)
@@ -73,6 +64,25 @@ export class GameController{
     
 }
     }
+     botPlace(){
+             const ships = [
+                ["ca"],
+                ["b"],
+                ["cr"],
+                ["s"],
+                ["d"],
+            ];
+    
+            ships.forEach(([type]) => {
+                let placed = false;
+                while (!placed) {
+                    const axis = Math.random() < 0.5 ? "x" : "y";
+                    const x = Math.floor(Math.random() * 10);
+                    const y = Math.floor(Math.random() * 10);
+                    placed = this.botPlayer.gameBoard.place(type, axis, x, y);
+                }
+            });
+        }
     checkWin(opponent) {
         console.log(opponent.gameBoard.allSunk())
     if(opponent.gameBoard.allSunk()) {
@@ -83,6 +93,10 @@ export class GameController{
         return true;
     }
     return false;
+}
+reset(){
+    this.realPlayer=new Player()
+    this.botPlayer=new Player(true)
 }
 
 }

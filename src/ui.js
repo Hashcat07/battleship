@@ -5,14 +5,20 @@ import { Ship } from "./ship";
 export class Ui{
     constructor(){
             this.controller=new GameController()
+            this.getInput()
+            this.renderBoard()
+            
+
     }
-    renderBoard(){
+    renderBoard(){const playButton=document.querySelector('.play')
+      playButton.disabled=true
         const botBoard=document.querySelector('.botBoard')
         const playerBoard=document.querySelector('.playerBoard')
         render(this.controller.botPlayer.gameBoard.board,false,botBoard)
         render(this.controller.realPlayer.gameBoard.board,false,playerBoard)
+        console.log(this.controller.botPlayer.board)
         function render(board, hideShips, container){
-            console.log(board)
+          container.innerHTML=""
         for (let x = 0; x < 10; x++) {
         for (let y = 0; y < 10; y++) {
         const cell = document.createElement("div");
@@ -29,9 +35,69 @@ export class Ui{
         container.appendChild(cell);
       }
       }
-  }
-  this.controller.attachEventListener()
+  }}
+        getInput(){
+          const dialog=document.querySelector('dialog')
+          const type=document.querySelector('select')
+          const xcoords=document.querySelector('#xcoords')
+          const ycoords=document.querySelector('#ycoords')
+          const placeShip=document.querySelector('.placeShip')
+          placeShip.addEventListener('click',()=>{
+            document.querySelector('select').selectedIndex = 0;  // First option selected
+            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false); // Uncheck radios
+            document.querySelector('#xcoords').value = ''; 
+            document.querySelector('#ycoords').value = '';
+            dialog.showModal()
+          })
+          const close=document.querySelector('.closeDialog')
+          close.addEventListener('click',()=>{
+            document.querySelector('select').selectedIndex = 0;  // First option selected
+            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false); // Uncheck radios
+            document.querySelector('#xcoords').value = ''; 
+            document.querySelector('#ycoords').value = '';
+            dialog.close()
+          })
+          const submit=document.querySelector('.submit')
+          submit.addEventListener('click',(e)=>{
+            e.preventDefault()
+            const typeValue = type.value;
+            let axisValue = document.querySelector('input[name="axis"]:checked')?.value;
+            const xValue = parseInt(xcoords.value);
+            const yValue = parseInt(ycoords.value);
+
+            console.log(typeValue,axisValue,xValue,yValue)
+            if(this.controller.placeShips(typeValue,axisValue,xValue,yValue))
+            {
+              const index=type.selectedIndex
+              type.remove(index)
+            }
+            console.log('total', )
+            if(this.controller.realPlayer.gameBoard.ships.length===5)
+              this.startGame()
+        
+            document.querySelector('select').selectedIndex = 0;
+            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false);
+            document.querySelector('#xcoords').value = ''; 
+            document.querySelector('#ycoords').value = '';
+            dialog.close()
+            this.renderBoard()
+            
+        })
+          }
+        startGame(){
+            const playButton=document.querySelector('.play')
+            playButton.disabled=false
+            const playerBoard=document.querySelector('.playerBoard')
+            this.controller.attachEventListener()
+            playButton.addEventListener('click',()=>{
+              Array.from(playerBoard.querySelectorAll('.cell')).forEach((cell)=>{
+                cell.style.pointerEvents = 'none'
+              })
+              
+              this.renderBoard()
+            })
+
         }
-    }
+      }
 
 
