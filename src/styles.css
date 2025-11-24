@@ -1,48 +1,227 @@
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  padding: 20px;
+  background-color: #111111;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #222222;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.title h1 {
+  color: #00ffff;
+  font-size: 2.5em;
+  margin: 0;
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.action {
+  background-color: #333333;
+  color: #ffffff;
+  border: 2px solid #00ffff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.action:hover {
+  background-color: #00ffff;
+  color: #000000;
+  box-shadow: 0 0 15px #00ffff;
+}
+
+.action:disabled {
+  background-color: #555555;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.gameDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.gameBoard, .gameboard {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+  width: 100%;
+  max-width: 500px;
+}
+
+.name h1 {
+  color: #ffaa00;
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  text-shadow: 0 0 8px #ffaa00;
+}
+
 .playerBoard, .botBoard {
   display: grid;
-  grid-template-columns: repeat(10, 50px);
-  grid-template-rows: repeat(10, 50px);
-  gap: 2px;
-  margin-bottom: 20px;
+  grid-template-columns: 20px repeat(10, 38px);
+  grid-template-rows: 20px repeat(10, 38px);
+  gap: 3px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .cell {
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  background-color: lightblue;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #444444;
+  background-color: #2a2a2a;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8em;
+}
+
+.cell:hover {
+  background-color: #444444;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .ship {
-  background-color: gray;
+  background-color: #666666;
+  box-shadow: inset 0 0 5px #888888;
 }
-.gameDiv{
-    display: flex;
-    justify-content: space-evenly;
-}
-.name{
-    display: flex;
-    justify-content: center;
-}
-#bot{
-margin-left: 20px;
-}
-.miss{
-  background-color: yellow;
-}
-.hit{
-  background-color: red;
-}
-.red{
-  background-color: tomato;
-  content: "x";}
 
+.hit {
+  background-color: #ff0000;
+  box-shadow: 0 0 15px #ff0000;
+  color: #ffffff;
+}
+
+.miss {
+  background-color: #ffff00;
+  box-shadow: 0 0 15px #ffff00;
+  color: #000000;
+}
+
+.red {
+  background-color: #ff4500;
+  box-shadow: 0 0 15px #ff4500;
+  color: #ffffff;
+}
 .cell.hit,
 .cell.miss,
-.cell.red,
-.cell.end {
-    pointer-events: none;
+.cell.red {
+  pointer-events: none;
+  cursor: default;
 }
-.container{
-  text-align: center;
+
+dialog {
+  background-color: #111111;
+  color: #ffffff;
+  border: 2px solid #00ffff;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  padding: 24px;
+  max-width: 400px;
+  width: 90%;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+dialog label {
+  display: block;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+dialog select, dialog input {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #00ffff;
+  padding: 8px;
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+dialog button {
+  background-color: #00ffff;
+  color: #000000;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+dialog button:hover {
+  background-color: #0099cc;
+}
+
+.closeDialog {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 1px solid #00ffff;
+}
+
+fieldset label {
+  display: flex;
+  margin: 0;
+  width: 1rem;
+}
+.legend{
+  font-size: smaller;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.keyLegend{
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
 }

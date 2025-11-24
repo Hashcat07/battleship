@@ -32,7 +32,6 @@ export class GameController{
                 
             })
         })
-
     }
     sendAttack(player,xCoords,yCoords){
         let result=player.gameBoard.receiveAttack(xCoords,yCoords)

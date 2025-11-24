@@ -1,4 +1,3 @@
-import { GameBoard } from "./gameBoard";
 import { GameController } from "./gameController";
 import { Ship } from "./ship";
 
@@ -7,8 +6,7 @@ export class Ui{
             this.controller=new GameController()
             this.getInput()
             this.renderBoard()
-            
-
+            this.reset()
     }
     renderBoard(){const playButton=document.querySelector('.play')
       playButton.disabled=true
@@ -19,7 +17,21 @@ export class Ui{
         console.log(this.controller.botPlayer.gameBoard.board)
         function render(board, hideShips, container){
           container.innerHTML=""
+          const keyLegend=document.createElement('div');keyLegend.textContent="x/y";keyLegend.classList.add('legend');keyLegend.classList.add('keyLegend')
+          container.appendChild(keyLegend)
+          for(let i=0;i<=9;i++){
+            const topL=document.createElement('div')
+            topL.textContent=i
+            topL.classList.add('legend')
+            container.appendChild(topL)
+          }
+          
         for (let x = 0; x < 10; x++) {
+          const leftLegend=document.createElement('div')
+          leftLegend.classList.add('leftLegend')
+          leftLegend.classList.add('legend')
+          leftLegend.textContent=x
+          container.appendChild(leftLegend)
         for (let y = 0; y < 10; y++) {
         const cell = document.createElement("div");
         cell.classList.add("cell");
@@ -47,16 +59,16 @@ export class Ui{
           const ycoords=document.querySelector('#ycoords')
           const placeShip=document.querySelector('.placeShip')
           placeShip.addEventListener('click',()=>{
-            document.querySelector('select').selectedIndex = 0;  // First option selected
-            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false); // Uncheck radios
+            document.querySelector('select').selectedIndex = 0;
+            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false);
             document.querySelector('#xcoords').value = ''; 
             document.querySelector('#ycoords').value = '';
             dialog.showModal()
           })
           const close=document.querySelector('.closeDialog')
           close.addEventListener('click',()=>{
-            document.querySelector('select').selectedIndex = 0;  // First option selected
-            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false); // Uncheck radios
+            document.querySelector('select').selectedIndex = 0;
+            document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false);
             document.querySelector('#xcoords').value = ''; 
             document.querySelector('#ycoords').value = '';
             dialog.close()
@@ -96,7 +108,13 @@ export class Ui{
                 cell.style.pointerEvents = 'none';
             });
         });
-
+        }
+        reset(){
+          document.querySelector('.action.reset').addEventListener('click',()=>{
+            this.controller.reset()
+            this.controller=new GameController()
+            this.renderBoard()
+          })
         }
       }
 
