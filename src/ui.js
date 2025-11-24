@@ -90,19 +90,11 @@ export class Ui{
         const playerBoard = document.querySelector('.playerBoard');
         
         playButton.addEventListener('click', () => {
-            console.log('Play clicked - Step 1: Rendering boards');  // Debug log
-            this.renderBoard();  // Re-render FIRST
-            
-            console.log('Play clicked - Step 2: Attaching listeners');  // Debug log
-            this.controller.attachEventListener();  // Attach to NEW cells
-            
-            console.log('Play clicked - Step 3: Setting pointerEvents');  // Debug log
-            // Fix: Correct selector (remove redundant '.playerBoard')
+            this.renderBoard();
+            this.controller.attachEventListener();
             Array.from(playerBoard.querySelectorAll('.cell')).forEach((cell) => {
                 cell.style.pointerEvents = 'none';
             });
-            
-            console.log('Play clicked - Done');  // Debug log
         });
 
         }
