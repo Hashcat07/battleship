@@ -16,7 +16,7 @@ export class Ui{
         const playerBoard=document.querySelector('.playerBoard')
         render(this.controller.botPlayer.gameBoard.board,false,botBoard)
         render(this.controller.realPlayer.gameBoard.board,false,playerBoard)
-        console.log(this.controller.botPlayer.board)
+        console.log(this.controller.botPlayer.gameBoard.board)
         function render(board, hideShips, container){
           container.innerHTML=""
         for (let x = 0; x < 10; x++) {
@@ -35,7 +35,11 @@ export class Ui{
         container.appendChild(cell);
       }
       }
-  }}
+       
+  }
+  if(this.controller.realPlayer.gameBoard.ships.length===5)
+              this.startGame()
+            }
         getInput(){
           const dialog=document.querySelector('dialog')
           const type=document.querySelector('select')
@@ -71,10 +75,6 @@ export class Ui{
               const index=type.selectedIndex
               type.remove(index)
             }
-            console.log('total', )
-            if(this.controller.realPlayer.gameBoard.ships.length===5)
-              this.startGame()
-        
             document.querySelector('select').selectedIndex = 0;
             document.querySelectorAll('input[name="axis"]').forEach(r => r.checked = false);
             document.querySelector('#xcoords').value = ''; 
@@ -85,17 +85,25 @@ export class Ui{
         })
           }
         startGame(){
-            const playButton=document.querySelector('.play')
-            playButton.disabled=false
-            const playerBoard=document.querySelector('.playerBoard')
-            this.controller.attachEventListener()
-            playButton.addEventListener('click',()=>{
-              Array.from(playerBoard.querySelectorAll('.cell')).forEach((cell)=>{
-                cell.style.pointerEvents = 'none'
-              })
-              
-              this.renderBoard()
-            })
+        const playButton = document.querySelector('.play');
+        playButton.disabled = false;
+        const playerBoard = document.querySelector('.playerBoard');
+        
+        playButton.addEventListener('click', () => {
+            console.log('Play clicked - Step 1: Rendering boards');  // Debug log
+            this.renderBoard();  // Re-render FIRST
+            
+            console.log('Play clicked - Step 2: Attaching listeners');  // Debug log
+            this.controller.attachEventListener();  // Attach to NEW cells
+            
+            console.log('Play clicked - Step 3: Setting pointerEvents');  // Debug log
+            // Fix: Correct selector (remove redundant '.playerBoard')
+            Array.from(playerBoard.querySelectorAll('.cell')).forEach((cell) => {
+                cell.style.pointerEvents = 'none';
+            });
+            
+            console.log('Play clicked - Done');  // Debug log
+        });
 
         }
       }

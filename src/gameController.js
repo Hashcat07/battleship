@@ -17,9 +17,12 @@ export class GameController{
         return false
     }
     attachEventListener(){
-        const cells=Array.from(document.querySelectorAll('.cell'))
+        console.log('attached')
+        const cells=Array.from(document.querySelectorAll('.botBoard .cell'))
+        console.log(cells)
         cells.forEach(cell=>{
             cell.addEventListener('click',()=>{
+                console.log('attached')
                 let xCoords= cell.dataset.row
                 let yCoords=cell.dataset.column
                 let result=this.sendAttack(this.currentPlayer===this.realPlayer? this.botPlayer:this.realPlayer ,xCoords,yCoords)
